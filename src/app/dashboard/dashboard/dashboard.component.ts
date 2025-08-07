@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Article } from 'src/app/models/article.model';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CreateArticleDialogComponent } from 'src/app/shared/create-article-dialog/create-article-dialog.component';
@@ -15,10 +16,21 @@ import { environment } from 'src/environments/environment';
 export class DashboardComponent implements OnInit {
   articles: Article[] = [];
   role: string | null = null;
+  stats: any = null;
 
-  constructor(private articleService: ArticleService,private authService:AuthService,private dialog: MatDialog) {
+  constructor(private articleService: ArticleService,private authService:AuthService,private dialog: MatDialog,
+    private analyticsService: AnalyticsService) {
     this.authService.getRole().subscribe(role => {
       this.role = role;
+    });
+    
+    this.authService.getRole().subscribe(role => {
+      this.role = role;
+      if (role === 'admin') {
+        this.analyticsService.getAdminStats().subscribe(data => this.stats = data);
+      } else if (role && role !== 'reader') {
+        this.analyticsService.getUserStats().subscribe(data => this.stats = data);
+      }
     });
   }
 

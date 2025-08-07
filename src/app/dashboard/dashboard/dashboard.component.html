@@ -10,6 +10,30 @@
         </button>
       </div>
       </nav>
+
+      <div *ngIf="stats" class="row text-white text-center mb-4">
+        <div class="col" *ngIf="role === 'admin'">
+          <h5>Total Articles</h5>
+          <p>{{ stats.totalArticles }}</p>
+        </div>
+        <div class="col" *ngIf="role === 'admin'">
+          <h5>Total Comments</h5>
+          <p>{{ stats.totalComments }}</p>
+        </div>
+        <div class="col" *ngIf="role === 'admin'">
+          <h5>Total Users</h5>
+          <p>{{ stats.totalUsers }}</p>
+        </div>
+        <div class="col" *ngIf="role !== 'reader' && role !== 'admin'">
+          <h5>Your Articles</h5>
+          <p>{{ stats.userArticles }}</p>
+        </div>
+        <div class="col" *ngIf="role !== 'reader' && role !== 'admin'">
+          <h5>Your Comments</h5>
+          <p>{{ stats.userComments }}</p>
+        </div>
+      </div>
+
       <div class="articles-section d-flex flex-column align-items-center">
         <h1 class="text-center text-white">Lastest Stories</h1>
         <div class="d-grid gap-3 container">

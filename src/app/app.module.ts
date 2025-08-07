@@ -22,6 +22,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { EditArticleDialogComponent } from './shared/edit-article-dialog/edit-article-dialog.component';
 import { TokenExpiryDialogComponent } from './shared/token-expiry-dialog/token-expiry-dialog.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,7 @@ import { TokenExpiryDialogComponent } from './shared/token-expiry-dialog/token-e
     MatDialogModule,
     MatInputModule,
     MatButtonModule,
-    MatFormFieldModule,
+    MatFormFieldModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

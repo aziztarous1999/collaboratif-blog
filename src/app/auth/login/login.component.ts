@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -27,8 +26,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      this.errorMessage = 'Please fill in all required fields correctly.';
-      this.toastr.error(this.errorMessage);
+      this.toastr.error('Please fill in all required fields correctly.');
       return;
     };
   
@@ -38,8 +36,7 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
-        const msg = err.error?.error || 'Login failed';
-        this.errorMessage = msg;
+        const msg = err.error?.error || err.error || 'Login failed';
         this.toastr.error(msg);
       }
     });
