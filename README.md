@@ -42,7 +42,13 @@ Here are some visual highlights of the Collab Blog frontend:
   - **🧾 Notification send and recieve**  
   ![Signup](https://github.com/aziztarous1999/collaboratif-blog/blob/3.notifications/demo/notification-send-demo.png)
   ![Signup](https://github.com/aziztarous1999/collaboratif-blog/blob/3.notifications/demo/notifications-recieved-demo.png)
-  
+
+  - **🧾 Admin Stat**  
+  ![Signup](https://github.com/aziztarous1999/collaboratif-blog/blob/4.statistics/demo/admin-statistics-demo.png)
+
+  - **🧾 User Stat**  
+  ![Signup](https://github.com/aziztarous1999/collaboratif-blog/blob/4.statistics/demo/user-statistics-demo.png)
+
 ### Setup
 
 ```bash
