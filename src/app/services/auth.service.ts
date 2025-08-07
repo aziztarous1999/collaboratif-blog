@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment';
+import { SocketService } from './socket.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -13,13 +14,16 @@ export class AuthService {
   private userRole = new BehaviorSubject<string | null>(null);
   private userId = new BehaviorSubject<string | null>(null);
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router,
+    private socketService: SocketService ) {
     const token = this.getToken();
     if (token) {
       try {
         const decoded: any = jwtDecode(token);
         this.userRole.next(decoded.role);
         this.userId.next(decoded.id);
+        console.log("decoded.id",decoded.id)
+        this.socketService.joinUserRoom(decoded.id);
       } catch (err) {
         console.error('Invalid token:', err);
         this.logout();

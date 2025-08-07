@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Article } from 'src/app/models/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { SocketService } from 'src/app/services/socket.service';
 import { EditArticleDialogComponent } from 'src/app/shared/edit-article-dialog/edit-article-dialog.component';
 import { environment } from 'src/environments/environment';
 
@@ -26,8 +28,14 @@ export class ArticleDetailComponent implements OnInit {
     private articleService: ArticleService,
     private authService: AuthService,
     private router: Router,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private socketService:SocketService,
+    private toastr: ToastrService
+  ) {
+    this.socketService.onNewComment().subscribe(data => {
+      this.toastr.success(data.message);
+    });
+  }
 
   ngOnInit(): void {
     this.articleId = this.route.snapshot.paramMap.get('id')!;
@@ -99,4 +107,6 @@ editArticle(): void {
     }
   });
 }
+
+
 }
