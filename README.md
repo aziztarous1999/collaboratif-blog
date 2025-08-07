@@ -40,8 +40,8 @@ Here are some visual highlights of the Collab Blog frontend:
   ![Signup](https://github.com/aziztarous1999/collaboratif-blog/blob/1.auth/demo/signup-demo.png)
 
   - **🧾 Notification send and recieve**  
-  ![Signup](https://github.com/aziztarous1999/collaboratif-blog/blob/1.auth/demo/notification-send-demo)
-  ![Signup](https://github.com/aziztarous1999/collaboratif-blog/blob/1.auth/demo/notification-recieved-demo)
+  ![Signup](https://github.com/aziztarous1999/collaboratif-blog/blob/1.auth/demo/notification-send-demo.png)
+  ![Signup](https://github.com/aziztarous1999/collaboratif-blog/blob/1.auth/demo/notification-recieved-demo.png)
   
 ### Setup
 
