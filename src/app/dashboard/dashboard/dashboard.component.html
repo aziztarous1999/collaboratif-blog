@@ -1,14 +1,20 @@
 <div class="bg-dark">
     <nav class="navbar navbar-dark justify-content-between px-4">
         <span class="logo-title text-white p-2">CoWritten</span>
+        <div>
+          
+        <button
+        *ngIf="role !== 'reader' && role !==null" (click)="createArticle()" class="btn btn-info" style="margin-right:10px"><mat-icon style="line-height:inherit !important;font-size: 20px;">add</mat-icon>
+        </button>
         <button (click)="logout()" class="btn btn-secondary"><mat-icon style="line-height:inherit !important;font-size: 20px;">logout</mat-icon>
         </button>
+      </div>
       </nav>
       <div class="articles-section d-flex flex-column align-items-center">
         <h1 class="text-center text-white">Lastest Stories</h1>
         <div class="d-grid gap-3 container">
           <div class="card p-2" *ngFor="let article of articles">
-            <img class="card-img-top" [src]="article.image"  alt="Card image cap">
+            <img class="card-img-top" [src]="article.image?.includes('null') ?  './assets/images/no-image.avif' : article.image"  alt="Card image cap">
             <div class="card-body">
               <h2 class="card-title">{{ article.title }}</h2>
               <p class="card-text">{{ article.content | slice:0:190 }}...</p>

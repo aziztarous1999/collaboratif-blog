@@ -14,12 +14,24 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ArticleDetailComponent } from './article/article-detail/article-detail/article-detail.component';
 import { CommentComponent } from './article/comment/comment.component';
+import { ReplyDialogComponent } from './shared/reply-dialog/reply-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CreateArticleDialogComponent } from './shared/create-article-dialog/create-article-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { EditArticleDialogComponent } from './shared/edit-article-dialog/edit-article-dialog.component';
+import { TokenExpiryDialogComponent } from './shared/token-expiry-dialog/token-expiry-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     ArticleDetailComponent,
     CommentComponent,
+    ReplyDialogComponent,
+    CreateArticleDialogComponent,
+    EditArticleDialogComponent,
+    TokenExpiryDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,11 +41,15 @@ import { CommentComponent } from './article/comment/comment.component';
     FormsModule,
     ToastrModule.forRoot({
       closeButton: true,
-      timeOut: 5000, // 5 seconds
+      timeOut: 5000,
       progressBar: true,
     }),
     BrowserAnimationsModule,
     MatIconModule,
+    MatDialogModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

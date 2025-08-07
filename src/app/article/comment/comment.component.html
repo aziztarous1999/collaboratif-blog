@@ -1,11 +1,23 @@
 <div class="comment">
-    <strong>{{ comment.author.username }}</strong>: {{ comment.content }}
-    <div class="timestamp">{{ comment.createdAt | date: 'short' }}</div>
-  
-    <div class="replies" *ngIf="comment.replies.length > 0" style="margin-left: 20px;">
+  <strong>{{ comment.author.username }}</strong>: {{ comment.content }}
+  <div class="timestamp">{{ comment.createdAt | date: 'short' }}</div>
+
+  <button class="btn btn-sm btn-link text-light ps-0" (click)="openReplyModal()">Reply</button>
+  <button
+    *ngIf="role === 'admin'"
+    class="btn btn-sm btn-link text-danger ps-0"
+    (click)="deleteComment()">
+    Delete
+  </button>
+
+  <ng-container *ngIf="(comment.replies || []).length > 0">
+    <div class="replies" style="margin-left: 20px;">
       <ng-container *ngFor="let reply of comment.replies">
-        <app-comment [comment]="reply"></app-comment>
+        <app-comment
+          [comment]="reply"
+          (reply)="handleReply($event)">
+        </app-comment>
       </ng-container>
     </div>
-  </div>
-  
+  </ng-container>
+</div>

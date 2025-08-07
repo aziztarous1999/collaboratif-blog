@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Reply to {{ data.author }}</h2>
+<mat-dialog-content>
+  <textarea [(ngModel)]="replyContent" rows="5" class="form-control" placeholder="Write your reply..."></textarea>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button  class="btn btn-secondary" (click)="submit()" [disabled]="!replyContent.trim()">Submit</button>
+  <button mat-button (click)="cancel()" class="btn btn-danger" style="margin-left:5px">Cancel</button>
+</mat-dialog-actions>

@@ -1,3 +1,21 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.dark-modal .mat-dialog-container {
+    background-color: #474444;
+    color: #ffffff;
+  }
+  
+  .dark-modal .mat-dialog-title {
+    color: #ffffff;
+  }
+  
+  .dark-modal textarea,
+  .dark-modal input {
+    background-color: #2a2a2a;
+    color: #ffffff;
+  }
+  
+  .dark-modal button {
+    color: #ffffff;
+  }

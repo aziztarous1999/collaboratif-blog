@@ -19,12 +19,19 @@ export class ArticleService {
     return this.http.get<Article>(`${this.articlesApiUrl}/${id}`);
   }
 
-  createArticle(data: any): Observable<Article> {
-    return this.http.post<Article>(this.articlesApiUrl, data);
+  createArticle(data: FormData): Observable<any> {
+    return this.http.post(`${this.articlesApiUrl}`, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token') || ''}`
+      }
+    });
   }
-
-  updateArticle(id: string, data: any): Observable<Article> {
-    return this.http.put<Article>(`${this.articlesApiUrl}/${id}`, data);
+  updateArticle(id: string, data: FormData): Observable<any> {
+    return this.http.put(`${this.articlesApiUrl}/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token') || ''}`
+      }
+    });
   }
 
   deleteArticle(id: string): Observable<any> {
@@ -33,4 +40,19 @@ export class ArticleService {
   getCommentsByArticleId(articleId: string): Observable<Comment[]> {
     return this.http.get<Comment[]>(`${this.commentsApiUrl}/${articleId}`);
   }
+  createComment(articleId: string, content: string, parentId: string | null): Observable<Comment> {
+    const body = { articleId, content, parentId };
+    return this.http.post<Comment>(`${this.commentsApiUrl}`, body, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
+  deleteComment(commentId: string): Observable<any> {
+    return this.http.delete(`${this.commentsApiUrl}/${commentId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token') || ''}`
+      }
+    });
+  }  
 }

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'src/app/models/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { EditArticleDialogComponent } from 'src/app/shared/edit-article-dialog/edit-article-dialog.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,11 +19,14 @@ export class ArticleDetailComponent implements OnInit {
   comments: any[] = [];
   role: string | null = null;
   canEdit: boolean = false;
+  newCommentContent = new FormControl('');
 
   constructor(
     private route: ActivatedRoute,
     private articleService: ArticleService,
     private authService: AuthService,
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +43,6 @@ export class ArticleDetailComponent implements OnInit {
       this.article = data;
       this.article.image = environment.apiUrl + "/uploads/" + this.article.image;
       this.canEdit = this.authService.canEdit(this.article.author._id);
-      console.log('Can edit:', this.article.author._id);
     });
   }
 
@@ -49,4 +54,49 @@ export class ArticleDetailComponent implements OnInit {
   logout() {
     this.authService.logout(); // removes token and navigates to login
   }
+  onNewComment(): void {
+    const content = this.newCommentContent.value?.trim();
+    if (!content) return;
+  
+    this.articleService.createComment(this.articleId, content, null).subscribe(newComment => {
+      this.comments.push(newComment);
+      this.newCommentContent.reset();
+    });
+  }
+  onReplyToComment(event: { parentId: string; content: string }): void {
+    this.articleService
+      .createComment(this.articleId, event.content, event.parentId)
+      .subscribe(() => {
+        this.fetchComments();
+      });
+  }
+  onDeleteComment(commentId: string): void {
+  if (confirm('Are you sure you want to delete this comment?')) {
+    this.articleService.deleteComment(commentId).subscribe(() => {
+      this.fetchComments();
+    });
+  }
+}
+
+onDeleteArticle(): void {
+  if (confirm('Are you sure you want to delete this article?')) {
+    this.articleService.deleteArticle(this.article._id).subscribe(() => {
+      this.router.navigate(['/dashboard']);
+    });
+  }
+}
+
+editArticle(): void {
+  const dialogRef = this.dialog.open(EditArticleDialogComponent, {
+    width: '600px',
+    data: this.article
+  });
+
+  dialogRef.afterClosed().subscribe(updated => {
+    if (updated) {
+      this.fetchArticle();
+      this.fetchComments();
+    }
+  });
+}
 }

@@ -12,23 +12,33 @@
       <mat-icon class="link-icon">arrow_back_ios_new</mat-icon>
       <span>Dashboard</span></a>
       <div>
-        <button *ngIf="canEdit" (click)="logout()" class="btn btn-info"><mat-icon style="line-height:inherit !important;font-size: 20px;">edit</mat-icon>
+        <button *ngIf="canEdit" (click)="editArticle()" class="btn btn-info"><mat-icon style="line-height:inherit !important;font-size: 20px;">edit</mat-icon>
         </button>
-  <button *ngIf="role === 'admin'" (click)="logout()" class="btn btn-danger" style="margin-left:4px"><mat-icon style="line-height:inherit !important;font-size: 20px">delete</mat-icon>
+  <button *ngIf="role === 'admin'" (click)="onDeleteArticle()" class="btn btn-danger" style="margin-left:4px"><mat-icon style="line-height:inherit !important;font-size: 20px">delete</mat-icon>
   </button>
       </div>
     </div>
 <div *ngIf="article" class="article-container">
     <h1 class="article-title">{{ article.title }}</h1>
   
-    <div *ngIf="article.image" class="article-image-wrapper">
-      <img [src]="article.image" alt="Article Image" class="article-image" />
+    <div class="article-image-wrapper">
+      <img [src]="article.image?.includes('null') ?  './assets/images/no-image.avif' : article.image" alt="Article Image" class="article-image" />
     </div>
   
     <p class="article-content mt-2">{{ article.content }}</p>
     <p class="article-author">
       <strong>Author:</strong> {{ article.author?.username }}
     </p>
+    <p class="article-author">
+      <strong>Created :</strong> {{ article.createdAt | date: 'short' }}
+    </p>
+    <div class="article-author">
+      <strong>Tags:</strong>
+      <ul>
+        <li *ngFor="let tag of article.tags">{{ tag }}</li>
+      </ul>
+    </div>
+    
   </div>
   
   <hr />
@@ -37,7 +47,11 @@
   <div *ngIf="comments.length > 0">
     <h3>Comments</h3>
     <ng-container *ngFor="let comment of comments">
-      <app-comment [comment]="comment"></app-comment>
+      <app-comment
+      [comment]="comment"
+      [role]="role ? role : ''"
+      (reply)="onReplyToComment($event)" 
+      (delete)="onDeleteComment($event)"></app-comment>
     </ng-container>
   </div>
   
@@ -45,5 +59,7 @@
   <ng-template #noComments>
     <p>No comments yet.</p>
   </ng-template>
+  <textarea [formControl]="newCommentContent" rows="3" placeholder="Write a comment..." class="form-control"></textarea>
+<button class="btn btn-secondary mt-2" (click)="onNewComment()">Post Comment</button>
 </div>
 </div>

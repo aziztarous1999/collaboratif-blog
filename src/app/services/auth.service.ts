@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = environment.apiUrl+'/api'; // update if needed
+  private apiUrl = environment.apiUrl+'/api';
   private tokenKey = 'auth_tkn';
   private userRole = new BehaviorSubject<string | null>(null);
   private userId = new BehaviorSubject<string | null>(null);
@@ -22,7 +22,7 @@ export class AuthService {
         this.userId.next(decoded.id);
       } catch (err) {
         console.error('Invalid token:', err);
-        this.logout(); // optional: clear corrupted token
+        this.logout();
       }
     }
   }
@@ -32,12 +32,35 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/auth/login`, credentials).pipe(
       tap((res: any) => {
         localStorage.setItem(this.tokenKey, res.token);
+        localStorage.setItem('refreshToken', res.refreshToken);
         const decodedToken: any = jwtDecode(res.token);
         this.userRole.next(decodedToken.role);
         this.userId.next(decodedToken.id);
       })
     );
   }
+  
+  refreshToken(): Observable<any> {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) return throwError(() => 'No refresh token');
+  
+    return this.http.post(`${this.apiUrl}/auth/refresh`, { refreshToken }).pipe(
+      tap((res: any) => {
+        this.saveTokens(res.token, res.refreshToken);
+  
+        const decodedToken: any = jwtDecode(res.token);
+        this.userRole.next(decodedToken.role);
+        this.userId.next(decodedToken.id);
+      })
+    );
+  }
+  
+  
+  private saveTokens(token: string, refreshToken: string) {
+    localStorage.setItem('auth_tkn', token);
+    localStorage.setItem('refreshToken', refreshToken);
+  }
+
 
   register(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/register`, data);
@@ -62,7 +85,6 @@ export class AuthService {
   }
 
   canEdit(articleOwner:string): boolean {
-    console.log("this.userId.getValue():",this.userId.getValue());
     return (this.userRole.getValue() === 'admin' || this.userRole.getValue() === 'editor' || articleOwner ===this.userId.getValue());
   }
 }

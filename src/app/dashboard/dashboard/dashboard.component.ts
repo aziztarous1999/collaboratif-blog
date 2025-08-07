@@ -1,9 +1,10 @@
-// src/app/dashboard/dashboard.component.ts
 
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Article } from 'src/app/models/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { CreateArticleDialogComponent } from 'src/app/shared/create-article-dialog/create-article-dialog.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -13,8 +14,13 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardComponent implements OnInit {
   articles: Article[] = [];
+  role: string | null = null;
 
-  constructor(private articleService: ArticleService,private authService:AuthService) {}
+  constructor(private articleService: ArticleService,private authService:AuthService,private dialog: MatDialog) {
+    this.authService.getRole().subscribe(role => {
+      this.role = role;
+    });
+  }
 
   ngOnInit() {
     this.articleService.getArticles().subscribe({
@@ -28,6 +34,27 @@ export class DashboardComponent implements OnInit {
     });
   }
   logout() {
-    this.authService.logout(); // removes token and navigates to login
+    this.authService.logout();
   }
+  fetchArticles(): void {
+    this.articleService.getArticles().subscribe((data) => {
+      this.articles = data.map(article => {
+        article.image = environment.apiUrl + "/uploads/" + article.image;
+        return article;
+      });
+    });
+  }
+
+  createArticle(): void {
+    const dialogRef = this.dialog.open(CreateArticleDialogComponent, {
+      width: '600px'
+    });
+  
+    dialogRef.afterClosed().subscribe((newArticle) => {
+      if (newArticle) {
+        this.fetchArticles();
+      }
+    });
+  }
+  
 }

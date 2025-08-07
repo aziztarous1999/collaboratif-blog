@@ -16,6 +16,12 @@
   border-radius: 5px;
 }
 
+img{
+  width:100%;
+  max-width: 60%;
+  max-height: 70vh;
+}
+
 
 .home-link{
   margin-top: 5px;
@@ -34,4 +40,8 @@
 
 .dashboard-link-container{
   margin-bottom: 30px;
+}
+
+textarea{
+  background-color: #ffffff9e;
 }
