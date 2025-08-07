@@ -1,27 +1,55 @@
-# CollabBlogFrontend
+# 📝 Collab Blog Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.18.
+A collaborative blogging platform built with Angular 12, designed to support dynamic permissions, real-time comments, and scalable architecture. This is the frontend application that interacts with a secure Express.js backend via RESTful APIs.
 
-## Development server
+## 🚀 Tech Stack
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- **Angular CLI**: 12.2.18
+- **Node.js**: 14.21.3
+- **Package Manager**: npm 6.14.18
+- **Styling**: Angular Material & Bootstrap
+- **Authentication**: JWT-based with role-based access control
+- **Routing**: Angular Router with guards
+- **State Management**: RxJS BehaviorSubjects
 
-## Code scaffolding
+## 📦 Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
 
-## Build
+- Node.js v14.21.3
+- npm v6.14.18
+- Angular CLI v12.2.18 (`npm install -g @angular/cli@12.2.18`)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 📸 Demo Screenshots
 
-## Running unit tests
+Here are some visual highlights of the Collab Blog frontend:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **🏠 Homepage Section**  
+  ![Homepage](https://github.com/aziztarous1999/collaboratif-blog/blob/1.auth/demo/homepage-demo.png)
 
-## Running end-to-end tests
+- **📝 Article Details View**  
+  ![Article Details](https://github.com/aziztarous1999/collaboratif-blog/blob/1.auth/demo/article-details-demo.png)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **📊 Dashboard Overview**  
+  ![Dashboard](https://github.com/aziztarous1999/collaboratif-blog/blob/1.auth/demo/dashboard-demo.png)
 
-## Further help
+- **🔐 Login Page**  
+  ![Login](https://github.com/aziztarous1999/collaboratif-blog/blob/1.auth/demo/login-demo.png)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **🧾 Signup Page**  
+  ![Signup](https://github.com/aziztarous1999/collaboratif-blog/blob/1.auth/demo/signup-demo.png)
+  
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/collab-blog-frontend.git
+cd collab-blog-frontend
+
+# Install dependencies
+npm install
+
+# Start the development server
+ng serve
+
+
