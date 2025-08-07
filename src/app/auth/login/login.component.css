@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+HU:wght@100..400&display=swap');
+.login-background {
+    background-image: url('/assets/images/login-bg.avif');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .styled-card {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 0.5rem;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    min-height: 90vh;
+    background-clip: padding-box; /* ensures background stays within padding */
+    position: relative;
+  }
+  
+
+  .transparent-container {
+    background-image: url('/assets/images/login-bg.avif');
+    background-size: cover;
+    background-position: center;
+    clip-path: circle(100% at center);
+    min-height: 100%;
+    border-radius: 25px;
+  }
+
+  .transparent-container h1{
+    font-size: 3.4rem;
+    line-height: normal;
+  }
+
+  .transparent-container p{
+    font-size: 1rem;
+    line-height: normal;
+    color: silver;
+    font-family: "Playwrite HU", cursive;
+  }
+
+  img{
+    width:160px;
+  }
+
+  .welcome{
+    margin-top: 50px;
+    margin-bottom: 64px;
+  }
+
+  .welcome h1{
+    font-size: 3.5rem;
+    color: #333;
+    font-family: "Playfair Display", serif;
+  }
+
+  .signup{
+    margin-top: 80px;
+  }
+  .signup a{
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+  }
+  .signup a:hover{
+    text-decoration: underline;
+  }
+  .home-link{
+    margin-top: 5px;
+    text-decoration: none;
+    color: black;
+  }
+  .home-link span{
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+  }
+  .link-icon{
+    text-decoration: none !important;
+    margin-left: 5px;
+  }

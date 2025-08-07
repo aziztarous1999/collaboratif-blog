@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap');
+.logo-title{
+    font-family: "Playwrite AU QLD", cursive !important;
+    font-size: 1.4rem;
+}
+  .articles-section{
+    margin-top:18vh;
+    padding-bottom: 18vh;
+  }
+  .articles-section h1{
+  font-family: "Playwrite AU QLD", cursive;
+  font-size: 3rem;
+  margin-bottom: 50px;
+  }
+
+  .articles-section img{
+    max-height: 280px;
+    border-radius: 5px;
+  }
+
+  .articles-section .container{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .articles-section .card{
+    background:#fafafa38;
+    color:white;
+    border-color: #444;
+  }

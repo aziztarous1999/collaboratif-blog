@@ -1,0 +1,12 @@
+/* styles.css or component styles */
+.comment {
+    border-left: 2px solid #ddd;
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .timestamp {
+    font-size: 0.8em;
+    color: gray;
+  }
+  

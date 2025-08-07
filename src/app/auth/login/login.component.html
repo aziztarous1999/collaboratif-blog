@@ -1,0 +1,36 @@
+<div class="login-background">
+  <div class="container m-4 row styled-card">
+    <div class="col-md-5 transparent-container d-flex justify-content-center align-items-center">
+      <div>
+      <h1 class="text-white">Where Every Voice Shapes the Story.</h1>
+      <p>Create content together with real-time feedback and seamless collaboration.</p>
+    </div>
+    </div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="col-md-7 d-flex align-items-center flex-column ">
+  <div class="d-flex justify-content-end w-100">
+  <a [routerLink]="['/']" class="d-flex align-items-center home-link">
+    <span>Home</span>
+    <mat-icon class="link-icon">arrow_forward_ios_new</mat-icon></a>
+  </div>
+  <img src="./assets/images/logo.png" alt="logo" class="img-fluid"/>
+  <div>
+    <div class="welcome text-center">
+      <h1>Sign up with email</h1>
+      <p class="blockquote-footer">Enter your email and password to access your account</p>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" formControlName="email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+  
+    <div class="form-group mt-2">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" placeholder="Password" formControlName="password">
+    </div>
+    <button type="submit" class="btn btn-secondary mt-3 w-100">Login</button>
+  </div>
+  <p class="signup">Don't have an account? <a href="auth/register" >Sign Up</a></p>
+  </form>
+</div>
+</div>

@@ -1,0 +1,65 @@
+.registration-background {
+    background-image: url('/assets/images/registration-bg.avif');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .styled-card {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 2.5rem;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 30%;
+    min-height: fit-content;
+    background-clip: padding-box; /* ensures background stays within padding */
+    position: relative;
+  }
+
+  .welcome h1{
+    font-size: 2rem;
+    line-height: normal;
+    color: #333;
+  }
+
+  .welcome p{
+    font-size: 0.8rem;
+  }
+  
+  .welcome{
+    margin-bottom: 1rem;
+  }
+  
+  img{
+    width:160px;
+  }
+  
+  .link{
+    margin-top: 20px;
+  }
+  .link a{
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+  }
+  .link a:hover{
+    text-decoration: underline;
+  }
+  .home-link{
+    margin-top: 20px;
+    text-decoration: none;
+    color: black;
+  }
+  .home-link span{
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+  }
+  .link-icon{
+    text-decoration: none !important;
+    margin-right: 5px;
+  }

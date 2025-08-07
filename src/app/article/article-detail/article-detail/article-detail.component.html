@@ -1,0 +1,49 @@
+
+<nav class="navbar bg-dark navbar-dark justify-content-between px-4">
+  <span class="logo-title text-white p-2">CoWritten</span>
+  <button (click)="logout()" class="btn btn-secondary"><mat-icon style="line-height:inherit !important;font-size: 20px;">logout</mat-icon>
+  </button>
+</nav>
+<div class="bg-dark text-white details-container">
+<!-- ARTICLE DETAILS -->
+<div class="card-container">
+  <div class="d-flex justify-content-between w-100 dashboard-link-container">
+    <a [routerLink]="['/dashboard']" class="d-flex align-items-center home-link">
+      <mat-icon class="link-icon">arrow_back_ios_new</mat-icon>
+      <span>Dashboard</span></a>
+      <div>
+        <button *ngIf="canEdit" (click)="logout()" class="btn btn-info"><mat-icon style="line-height:inherit !important;font-size: 20px;">edit</mat-icon>
+        </button>
+  <button *ngIf="role === 'admin'" (click)="logout()" class="btn btn-danger" style="margin-left:4px"><mat-icon style="line-height:inherit !important;font-size: 20px">delete</mat-icon>
+  </button>
+      </div>
+    </div>
+<div *ngIf="article" class="article-container">
+    <h1 class="article-title">{{ article.title }}</h1>
+  
+    <div *ngIf="article.image" class="article-image-wrapper">
+      <img [src]="article.image" alt="Article Image" class="article-image" />
+    </div>
+  
+    <p class="article-content mt-2">{{ article.content }}</p>
+    <p class="article-author">
+      <strong>Author:</strong> {{ article.author?.username }}
+    </p>
+  </div>
+  
+  <hr />
+  
+  <!-- COMMENTS SECTION -->
+  <div *ngIf="comments.length > 0">
+    <h3>Comments</h3>
+    <ng-container *ngFor="let comment of comments">
+      <app-comment [comment]="comment"></app-comment>
+    </ng-container>
+  </div>
+  
+  <!-- NO COMMENTS TEMPLATE -->
+  <ng-template #noComments>
+    <p>No comments yet.</p>
+  </ng-template>
+</div>
+</div>
